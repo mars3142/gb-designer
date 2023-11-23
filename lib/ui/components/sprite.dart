@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:gb_designer/theme.dart';
 import 'package:gb_designer/ui/components/pixel.dart';
+import 'package:gb_designer/ui/palette.dart';
 
 class GBSprite extends StatefulWidget {
   const GBSprite({super.key, this.width = 16, this.height = 16});
@@ -14,10 +17,14 @@ class GBSprite extends StatefulWidget {
 
 class _GBSpriteState extends State<GBSprite> {
   List<Color> data = [];
+  final palette = Palette();
 
   @override
   void initState() {
-    data = List.generate(widget.width * widget.height, (index) => colorLightGray);
+    data = List.generate(
+      widget.width * widget.height,
+      (index) => Random().nextBool() ? palette.firstColor : palette.fourthColor,
+    );
     super.initState();
   }
 
@@ -43,7 +50,7 @@ class _GBSpriteState extends State<GBSprite> {
               color: color,
               onTap: (index) {
                 setState(() {
-                  data[index] = (data[index] == colorBlack) ? colorWhite : colorBlack;
+                  data[index] = (data[index] == palette.firstColor) ? palette.fourthColor : palette.firstColor;
                 });
               },
             );
