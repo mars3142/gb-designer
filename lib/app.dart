@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gb_designer/designer.dart';
+import 'package:gb_designer/ui/designer.dart';
 
 class GBApp extends StatelessWidget {
   const GBApp({super.key});
