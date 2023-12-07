@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gb_designer/theme.dart';
 
 class PaletteColor {
   const PaletteColor(this.firstColor, this.secondColor, this.thirdColor, this.fourthColor);
@@ -14,7 +13,8 @@ class Palette {
   Palette({
     this.index = 0,
     this.colors = const [
-      PaletteColor(colorWhite, colorLightGray, colorGray, colorBlack),
+      PaletteColor(Color(0xFF003f00), Color(0xFF2e7320), Color(0xFF8cbf0a), Color(0xFFa0cf0a)),
+      PaletteColor(Color(0XFF000000), Color(0xFF555555), Color(0xFFAAAAAA), Color(0xFFFFFFFF)),
     ],
   });
 

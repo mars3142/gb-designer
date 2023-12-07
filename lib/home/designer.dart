@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:gb_designer/common/palette_provider.dart';
 import 'package:gb_designer/theme.dart';
-import 'package:gb_designer/ui/components/pixel.dart';
-import 'package:gb_designer/ui/components/sprite.dart';
+import 'package:gb_designer/common/pixel.dart';
+import 'package:gb_designer/common/sprite.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class GBDesigner extends StatelessWidget {
+class GBDesigner extends ConsumerWidget {
   const GBDesigner({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    const paletteIndex = 0;
+    final palette = ref.watch(paletteProvider(paletteIndex));
     return Scaffold(
       appBar: AppBar(
         title: const Text('GB Designer'),
@@ -22,14 +26,14 @@ class GBDesigner extends StatelessWidget {
                 width: constraints.maxWidth / 4,
                 child: Column(
                   children: [
-                    const GBSprite(),
-                    const Row(
+                    const GBSprite(size: 8, paletteIndex: paletteIndex),
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text('L'),
-                        SizedBox(height: 12.0, width: 12.0, child: GBPixel(color: colorWhite, outline: true)),
-                        Text('R'),
-                        SizedBox(height: 12.0, width: 12.0, child: GBPixel(color: colorBlack, outline: true)),
+                        const Text('L'),
+                        SizedBox(height: 12.0, width: 12.0, child: GBPixel(color: palette.firstColor, outline: true)),
+                        const Text('R'),
+                        SizedBox(height: 12.0, width: 12.0, child: GBPixel(color: palette.fourthColor, outline: true)),
                       ],
                     ),
                     Row(
@@ -42,12 +46,12 @@ class GBDesigner extends StatelessWidget {
                           decoration: BoxDecoration(
                             border: Border.all(color: colorBlack),
                           ),
-                          child: const Row(
+                          child: Row(
                             children: [
-                              SizedBox(height: 12.0, width: 12.0, child: GBPixel(color: colorWhite)),
-                              SizedBox(height: 12.0, width: 12.0, child: GBPixel(color: colorLightGray)),
-                              SizedBox(height: 12.0, width: 12.0, child: GBPixel(color: colorGray)),
-                              SizedBox(height: 12.0, width: 12.0, child: GBPixel(color: colorBlack)),
+                              SizedBox(height: 12.0, width: 12.0, child: GBPixel(color: palette.firstColor)),
+                              SizedBox(height: 12.0, width: 12.0, child: GBPixel(color: palette.secondColor)),
+                              SizedBox(height: 12.0, width: 12.0, child: GBPixel(color: palette.thirdColor)),
+                              SizedBox(height: 12.0, width: 12.0, child: GBPixel(color: palette.fourthColor)),
                             ],
                           ),
                         ),
